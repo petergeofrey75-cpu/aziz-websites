@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O-Level Student Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>O-Level Student Management System</h1>
+            <p>Form 1 - Form 4 Academic Tracking</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="registration">Student Registration</button>
+            <button class="tab-button" data-tab="list">Student List</button>
+            <button class="tab-button" data-tab="performance">Academic Performance</button>
+            <button class="tab-button" data-tab="search">Search Student</button>
+        </nav>
+
+        <!-- Registration Tab -->
+        <section id="registration" class="tab-content active">
+            <h2>Register New Student</h2>
+            <form id="registrationForm" class="form">
+                <div class="form-group">
+                    <label for="studentName">Student Full Name *</label>
+                    <input type="text" id="studentName" required placeholder="Enter student name">
+                </div>
+
+                <div class="form-group">
+                    <label for="studentId">Student ID *</label>
+                    <input type="text" id="studentId" required placeholder="e.g., S001">
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender *</label>
+                    <select id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age *</label>
+                    <input type="number" id="age" required min="10" max="30" placeholder="Enter age">
+                </div>
+
+                <div class="form-group">
+                    <label for="form">Current Form Level *</label>
+                    <select id="form" required>
+                        <option value="">Select Form</option>
+                        <option value="1">Form 1</option>
+                        <option value="2">Form 2</option>
+                        <option value="3">Form 3</option>
+                        <option value="4">Form 4</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register Student</button>
+                <p id="registrationMessage" class="message"></p>
+            </form>
+        </section>
+
+        <!-- Student List Tab -->
+        <section id="list" class="tab-content">
+            <h2>Registered Students</h2>
+            <div id="studentListContainer">
+                <p class="no-data">No students registered yet.</p>
+            </div>
+        </section>
+
+        <!-- Academic Performance Tab -->
+        <section id="performance" class="tab-content">
+            <h2>Manage Academic Performance</h2>
+            <div class="performance-section">
+                <div class="form-group">
+                    <label for="performanceStudentId">Select Student *</label>
+                    <select id="performanceStudentId">
+                        <option value="">Choose a student</option>
+                    </select>
+                </div>
+
+                <div id="performanceForm" class="hidden">
+                    <div class="form-group">
+                        <label for="performanceForm">Select Form *</label>
+                        <select id="performanceFormLevel">
+                            <option value="">Select Form</option>
+                            <option value="1">Form 1</option>
+                            <option value="2">Form 2</option>
+                            <option value="3">Form 3</option>
+                            <option value="4">Form 4</option>
+                        </select>
+                    </div>
+
+                    <div class="subjects-grid">
+                        <div class="form-group">
+                            <label for="math">Mathematics (0-100) *</label>
+                            <input type="number" id="math" min="0" max="100" placeholder="Enter marks">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="english">English (0-100) *</label>
+                            <input type="number" id="english" min="0" max="100" placeholder="Enter marks">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="science">Science (0-100) *</label>
+                            <input type="number" id="science" min="0" max="100" placeholder="Enter marks">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="social">Social Studies (0-100) *</label>
+                            <input type="number" id="social" min="0" max="100" placeholder="Enter marks">
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="savePerformance()">Save Performance</button>
+                    <p id="performanceMessage" class="message"></p>
+                </div>
+
+                <div id="performanceDisplay" class="hidden">
+                    <h3>Student Performance Records</h3>
+                    <div id="performanceRecords"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Tab -->
+        <section id="search" class="tab-content">
+            <h2>Search Student</h2>
+            <div class="search-section">
+                <div class="form-group">
+                    <label for="searchInput">Search by Name or ID</label>
+                    <input type="text" id="searchInput" placeholder="Enter student name or ID">
+                    <button class="btn btn-primary" onclick="searchStudent()">Search</button>
+                </div>
+
+                <div id="searchResult" class="hidden">
+                    <div id="studentDetail"></div>
+                    <button class="btn btn-secondary" onclick="closeDetails()">Close</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Student Modal for Details -->
+    <div id="studentModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>Student Details</h2>
+            <div id="modalBody"></div>
+            <div class="modal-actions">
+                <button class="btn btn-danger" onclick="deleteStudent()">Delete Student</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
